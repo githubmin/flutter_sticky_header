@@ -155,6 +155,7 @@ class SliverStickyHeader extends RenderObjectWidget {
     this.overlapsContent: false,
     this.sticky = true,
     this.controller,
+    this.reverse = false,
   }) : super(key: key);
 
   /// Creates a widget that builds the header of a [SliverStickyHeader]
@@ -203,12 +204,15 @@ class SliverStickyHeader extends RenderObjectWidget {
   /// will be used.
   final StickyHeaderController? controller;
 
+  final bool reverse;
+
   @override
   RenderSliverStickyHeader createRenderObject(BuildContext context) {
     return RenderSliverStickyHeader(
       overlapsContent: overlapsContent,
       sticky: sticky,
       controller: controller ?? DefaultStickyHeaderController.of(context),
+      reverse: reverse,
     );
   }
 
@@ -224,7 +228,8 @@ class SliverStickyHeader extends RenderObjectWidget {
     renderObject
       ..overlapsContent = overlapsContent
       ..sticky = sticky
-      ..controller = controller ?? DefaultStickyHeaderController.of(context);
+      ..controller = controller ?? DefaultStickyHeaderController.of(context)
+      ..reverse = reverse;
   }
 }
 
@@ -250,6 +255,7 @@ class SliverStickyHeaderBuilder extends StatelessWidget {
     this.overlapsContent: false,
     this.sticky = true,
     this.controller,
+    this.reverse = false,
   }) : super(key: key);
 
   /// Called to build the [SliverStickyHeader]'s header.
@@ -274,6 +280,8 @@ class SliverStickyHeaderBuilder extends StatelessWidget {
   /// If a [StickyHeaderController] is not provided, then the value of [DefaultStickyHeaderController.of]
   /// will be used.
   final StickyHeaderController? controller;
+
+  final bool reverse;
 
   @override
   Widget build(BuildContext context) {
